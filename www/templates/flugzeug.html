@@ -1,0 +1,64 @@
+<ion-view view-title="Flugzeug">
+  <ion-content>
+
+    <div ng-include src="flugzeugtemplate"></div>
+
+  </ion-content>
+</ion-view>
+
+<script type="text/ng-template" id="flugzeugeingabe.html">
+  <div class="list">
+
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Model</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.modeltyp}}" ng-model="tempeingabe.modeltyp">
+      <input ng-if="!editFlag" type="text" placeholder="744" ng-model="tempeingabe.modeltyp">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Airline</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.airline}}" ng-model="tempeingabe.airline">
+      <input ng-if="!editFlag" type="text" placeholder="Lufthansa" ng-model="tempeingabe.airline">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Standort(e)</span>
+      <br><br>
+
+      <span ng-if="editFlag">
+
+        <!--<input ng-repeat="itemAirport in tempeingabe.onairport" type="text" placeholder="itemAirport" ng-model="tempeingabe.onairport[$index]"> - -->
+
+        <span ng-repeat="itemAirport in tempeingabe.onairport">{{itemAirport}} - </span>
+
+        <input type="text" placeholder="XXXX" ng-model="tempeingabe.newAirport">
+
+      </span>
+
+      <input ng-if="!editFlag" type="text" placeholder="EDDF" ng-model="tempeingabe.newAirport">
+
+    </label>
+
+  </div>
+
+  <button class="button button-block button-stable" ng-click="flugzeugeingabeSpeichern()">Eingaben speichern</button>
+
+</script>
+
+
+<script type="text/ng-template" id="flugzeugausgabe.html">
+
+  <ion-list show-delete="model.showDelete">
+
+    <ion-item ng-repeat="itemflugzeug in flugzeuge track by $index" class="item item-icon-right item-remove-animate">
+
+      {{itemflugzeug.modeltyp}} {{itemflugzeug.airline}} {{itemflugzeug.onairport[itemflugzeug.onairport.length-1]}}
+      <i class="icon ion-ios-arrow-right" ng-click="flugzeugEditieren($index)"></i>
+
+      <ion-delete-button ng-click="deleteFlugzeug($index)" class="ion-minus-circled"></ion-delete-button>
+
+    </ion-item>
+
+  </ion-list>
+
+
+
+</script>

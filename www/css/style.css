@@ -1,0 +1,80 @@
+/* Empty. Add your own CSS if you like */
+
+
+.home-container {
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  height: 100%;
+}
+.home-container > .row {
+  -webkit-flex: 1;
+}
+
+.icon-row {
+  -webkit-align-items: center;
+}
+
+
+.startseiteBox {
+
+  background-color: #cccccc;
+  height: 25vh !important;
+  margin: 15px 15px 15px 15px;
+
+}
+
+
+.textarea {
+
+  border: 1px solid black;
+
+}
+
+.mapUp {
+
+  height: 90% !important;
+
+}
+
+.mapDown {
+
+  height: 10% !important;
+
+}
+
+map {
+  position:absolute;
+  height:100%;
+  width:100%;
+}
+
+.scroll {
+  height: 100%;
+}
+
+#startseite {
+
+  background: url("../img/startseite-hintergrund.jpg") no-repeat center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+
+}
+
+.startseiteBoxenIcon {
+
+  height: 10vh !important;
+  background: url("../img/flugzeug-icon.png") no-repeat;
+  margin: 10px 10px 10px 10px;
+  -webkit-background-size: 50px 50px;
+  -moz-background-size: 50px 50px;
+  background-size: 50px 50px;
+
+}
+
+.startseiteBoxen {
+
+  margin: 25px 10px 10px 10px;
+  font-size: 20px;
+
+}

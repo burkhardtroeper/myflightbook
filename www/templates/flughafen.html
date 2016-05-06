@@ -1,0 +1,181 @@
+<ion-view view-title="Flughafen">
+  <ion-content scroll="false">
+
+    <div style="height: 100% !important;" ng-include src="flughafentemplate"></div>
+
+  </ion-content>
+</ion-view>
+
+<script type="text/ng-template" id="flughafeneingabe.html">
+
+  <div class="list">
+
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">ICAO-4-letter-Code</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.icaocode}}" ng-model="tempeingabe.icaocode">
+      <input ng-if="!editFlag" type="text" placeholder="EDDF" ng-model="tempeingabe.icaocode">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Flughafenname/Stadt/Land</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.city}}" ng-model="tempeingabe.city">
+      <input ng-if="!editFlag" type="text" placeholder="Frankfurt" ng-model="tempeingabe.city">
+    </label>
+
+  </div>
+
+  <button class="button button-block button-stable" ng-click="flughafeneingabeCheck()">Eingaben speichern</button>
+
+  <button class="button button-block button-stable" ng-click="flughafenAufKarteSuchen()">Auf Karte suchen</button>
+
+</script>
+
+
+<script type="text/ng-template" id="flughafeneingabe1.html">
+
+  <div class="mapUp">
+
+    <map center="eddf" zoom="3" on-click="mapTouched($event)">
+
+      <marker ng-repeat="pos in positions"
+        icon="img/me-marker.png"
+        position="{{pos.lat}}, {{pos.lng}}"
+      </marker>
+
+    </map>
+
+  </div>
+
+  <div class="tabs">
+    <div class="tab-item" ng-click="flughafeneingabeStart()">
+      Zurück
+    </div>
+    <div class="tab-item" ng-click="mapEingabeSpeichern()">
+      Speichern
+    </div>
+  </div>
+
+<!--  <div class="mapDown">
+
+    <div class="button-bar">
+      <div class="button button-stable" ng-click="flughafeneingabeStart()">Zurück</div>
+      <div class="button button-stable" ng-click="flughafeneingabeSpeichern()">Speichern</div>
+    </div>
+
+  </div>-->
+
+</script>
+
+
+<script type="text/ng-template" id="flughafeneingabe2.html">
+
+  <div class="mapUp">
+
+
+      <map center="{{airportSearchString}}"
+         zoom="14">
+
+        <marker
+          icon="img/me-marker.png"
+          position="{{airportSearchString}}"
+        </marker>
+
+
+
+      <!--<marker
+        icon="img/me-marker.png"
+        position="{{[yelp.lat, yelp.lon]}}" >
+      </marker >
+
+      <marker
+        clickable="true"
+        on-mousedown="showCafeDetail(event, cafe)"
+        ng-repeat="cafe in yelp.results"
+        icon="img/coffee-marker.png"
+        position="{{[cafe.location.coordinate.latitude, cafe.location.coordinate.longitude]}}" >
+      </marker >-->
+
+      <!--<info-window
+        id="marker-info" >
+        <div ng-non-bindable="" >
+          <div class="contents" >
+            <img ng-src="{{yelp.cafe.image_url}}"
+                 alt="" />
+            <h4 >{{yelp.cafe.name}}</h4 >
+
+            <p >{{yelp.cafe.snippet_text}}</p >
+
+            <div class="row" >
+              <div class="col" >
+                <p class="address" >
+                  <i class="ion ion-ios-location" ></i >
+                  {{yelp.cafe.location.display_address | join:", "}}
+                </p >
+              </div >
+              <div class="col" >
+                <p class="distance" >
+                  <i class="ion ion-ios-navigate" ></i >
+                  {{yelp.cafe.distance | number:"0"}}m
+                </p >
+                <p class="rating" >
+                  <i class="ion ion-star" ></i >
+                  {{yelp.cafe.rating}}
+                  &nbsp;
+                  <i class="ion ion-person" ></i >
+                  {{yelp.cafe.review_count}}
+                </p >
+              </div >
+            </div >
+
+            <div class="button button-small button-assertive"
+                 ng-click="getDirections(yelp.cafe)" >Get Directions
+            </div >
+          </div >
+        </div >
+      </info-window >-->
+
+    </map>
+
+  </div>
+
+  <div class="tabs">
+    <div class="tab-item" ng-click="flughafeneingabeStart()">
+      Zurück
+    </div>
+    <div class="tab-item" ng-click="flughafeneingabeSpeichern()()">
+      Speichern
+    </div>
+  </div>
+
+</script>
+
+
+<script type="text/ng-template" id="flughafenausgabe.html">
+
+
+  <map zoom="2">
+
+    <marker ng-repeat="airport in flughafen track by $index"
+
+      icon="img/me-marker.png"
+      position="{{airport.position}}"
+
+      title="{{airport.icaocode}}"
+
+    </marker>
+
+  </map>
+
+
+
+</script>
+
+<script id="entericaocode.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Stop!</h1>
+    </ion-header-bar>
+    <ion-content>
+      Please enter ICAO-Code of airport first
+    </ion-content>
+  </ion-modal-view>
+</script>

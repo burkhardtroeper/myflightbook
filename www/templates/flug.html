@@ -1,0 +1,103 @@
+<ion-view view-title="Flug">
+  <ion-content>
+
+    <div ng-include src="flugtemplate"></div>
+
+  </ion-content>
+</ion-view>
+
+<script type="text/ng-template" id="flugeingabe.html">
+
+  <div class="button-bar button-light" ng-if="!editFlag">
+    <div class="button" ng-click="neuFlagAendern(true)">Neueintrag</div>
+    <div class="button" ng-click="neuFlagAendern(false)">Nachtrag</div>
+  </div>
+
+  <div class="list">
+    <div class="item item-divider" ng-if="neuFlag===true">
+      {{ tempeingabe.datum }} - {{ tempeingabe.uhrzeit }}
+    </div>
+    <div class="item item-divider" ng-if="neuFlag===false">
+      Datum: manuelle Eingabe folgt ...
+    </div>
+
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Von:</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.von}}" ng-model="tempeingabe.von">
+      <input ng-if="!editFlag" type="text" placeholder="EDDF" ng-model="tempeingabe.von">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Windrichtung</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.vonwindrichtung}}" ng-model="tempeingabe.vonwindrichtung">
+      <input ng-if="!editFlag" type="text" placeholder="360" ng-model="tempeingabe.vonwindrichtung">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Windstärke</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.vonwindstaerke}}" ng-model="tempeingabe.vonwindstaerke">
+      <input ng-if="!editFlag" type="text" placeholder="10" ng-model="tempeingabe.vonwindstaerke">
+    </label>
+
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Nach:</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.nach}}" ng-model="tempeingabe.nach">
+      <input ng-if="!editFlag" type="text" placeholder="EDDM" ng-model="tempeingabe.nach">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Windrichtung</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.nachwindrichtung}}" ng-model="tempeingabe.nachwindrichtung">
+      <input ng-if="!editFlag" type="text" placeholder="360" ng-model="tempeingabe.nachwindrichtung">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Windstärke</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.nachwindstaerke}}" ng-model="tempeingabe.nachwindstaerke">
+      <input ng-if="!editFlag" type="text" placeholder="10" ng-model="tempeingabe.nachwindstaerke">
+    </label>
+
+    <label class="item item-input item-select">
+      <span class="input-label">Flugzeug</span>
+      <select>
+        <option ng-repeat="itemflugzeug in flugzeuge">{{itemflugzeug.modeltyp}} {{itemflugzeug.airline}}</option>
+      </select>
+    </label>
+
+    <label class="item item-input">
+      <span class="input-label">Route</span>
+      <textarea ng-if="editFlag" class="textarea" rows="3" placeholder="{{tempeingabe.flugroute}}" ng-model="tempeingabe.flugroute"></textarea>
+      <textarea ng-if="!editFlag" class="textarea" rows="3" placeholder="{{tempeingabe.von}} {{tempeingabe.nach}}" ng-model="tempeingabe.flugroute"></textarea>
+    </label>
+
+
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">SID</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.departure}}" ng-model="tempeingabe.departure">
+      <input ng-if="!editFlag" type="text" placeholder="cosmo1" ng-model="tempeingabe.departure">
+    </label>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">STAR</span>
+      <input ng-if="editFlag" type="text" placeholder="{{tempeingabe.arrival}}" ng-model="tempeingabe.arrival">
+      <input ng-if="!editFlag" type="text" placeholder="delta2" ng-model="tempeingabe.arrival">
+    </label>
+
+  </div>
+
+  <button class="button button-block button-stable" ng-click="flugeingabeSpeichern()">Eingaben speichern</button>
+
+</script>
+
+
+<script type="text/ng-template" id="flugausgabe.html">
+
+  <ion-list show-delete="model.showDelete">
+
+       <ion-item ng-repeat="itemflug in flug track by $index" class="item item-icon-right item-remove-animate">
+
+            {{itemflug.datum}} : {{itemflug.von}} - {{itemflug.nach}}
+            <i class="icon ion-ios-arrow-right" ng-click="flugEditieren($index)"></i>
+
+            <ion-delete-button ng-click="deleteFlug($index)" class="ion-minus-circled"></ion-delete-button>
+
+       </ion-item>
+
+  </ion-list>
+
+</script>
